@@ -1,0 +1,68 @@
+---
+title: 'Discord C2 Telemetry & Detection Engineering'
+summary: >-
+  A defensive research lab: generating realistic C2 beaconing telemetry over
+  Discord's API in order to write and validate detections, not to build a
+  usable offensive tool.
+refId: 'RESEARCH-C2DET-01'
+version: '0.1'
+date: 2026-08-09
+classification: 'Public — Defensive Research'
+author: 'Aayush Shrestha'
+status: 'stub'
+tags: ['Detection Engineering', 'ATT&CK', 'Wazuh', 'Blue Team']
+order: 2
+---
+
+<div class="callout callout-scope-note">
+  **Scope note, read this first:** this project is framed strictly as defensive research. The
+  goal is to understand what Discord-based C2 beaconing looks like on the wire and in logs, so
+  that detections can be written and validated against it — not to publish a usable command-and-
+  control tool. This page will not include a runnable/weaponized build, evasion or obfuscation
+  techniques, or anything copy-pasteable against a real target. If a future draft of this page
+  drifts toward that, cut it rather than publish it.
+</div>
+
+## 1.0 Objective
+
+TODO — one paragraph: what detection gap this lab was built to close, and why Discord's API
+specifically (it's a realistic, commonly abused legitimate-service C2 channel).
+
+## 2.0 Lab design
+
+TODO — isolated lab topology diagram/description: the beaconing telemetry generator, the
+Wazuh collector, and how they're network-segmented from anything else.
+
+## 3.0 ATT&CK mapping
+
+TODO — table of MITRE ATT&CK technique IDs this lab exercises, e.g. T1071.001 (Application
+Layer Protocol: Web Protocols) and T1102 (Web Service) — mapped to what telemetry each produces.
+
+## 4.0 Detection logic
+
+TODO — the actual Wazuh/Sigma rule logic, explained: what field/behavior it keys on (beacon
+interval regularity, JA3/TLS fingerprint, destination ASN, payload size distribution), and why
+that signal is hard for an attacker to remove without also removing the C2 channel's usefulness.
+
+## 5.0 Validation
+
+TODO — how detections were tested: true-positive rate against the generated telemetry, and a
+false-positive check against normal Discord client traffic.
+
+## 6.0 What I'd do differently / what I learned
+
+TODO.
+
+Next: [Python IDS](/work/python-ids/).
+
+<style>
+  {`
+  .callout-scope-note {
+    border: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--accent);
+    padding: var(--space-2) var(--space-3);
+    margin-block: var(--space-3);
+    font-size: var(--fs-sm);
+  }
+  `}
+</style>

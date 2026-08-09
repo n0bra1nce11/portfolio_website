@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from 'astro:content';
+import CaseStudyLayout from '@/layouts/CaseStudyLayout.astro';
+import { slugify } from '@/lib/slug';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work');
+  return entries.map((entry) => ({
+    params: { slug: slugify(entry.id) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, summary, refId, version, date, classification, author, status } = entry.data;
+---
+
+<CaseStudyLayout
+  title={title}
+  summary={summary}
+  refId={refId}
+  version={version}
+  date={date}
+  classification={classification}
+  author={author}
+  status={status}
+>
+  <Content />
+</CaseStudyLayout>

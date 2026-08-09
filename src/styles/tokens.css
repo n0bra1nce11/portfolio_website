@@ -1,0 +1,87 @@
+/*
+  Design tokens — "document brutalism".
+  One accent color, used only to encode finding severity by intensity.
+  See /DESIGN.md for the rationale.
+*/
+
+:root {
+  color-scheme: light;
+
+  --bg: #faf9f6;
+  --bg-raised: #f2f0ea;
+  --fg: #0a0a0a;
+  --fg-muted: #4a4a47;
+  --rule: #d8d6d0;
+  --rule-strong: #b8b6ae;
+
+  --accent: #b42318;
+  --accent-fg: #faf9f6;
+  --accent-tint-40: rgb(180 35 24 / 40%);
+  --accent-tint-15: rgb(180 35 24 / 15%);
+
+  --link: #0a0a0a;
+
+  --font-serif: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  --lh-prose: 1.7;
+  --lh-tight: 1.4;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+
+  --measure-prose: 42rem;
+  --measure-wide: 76rem;
+
+  --radius: 2px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0a0a0a;
+  --bg-raised: #141412;
+  --fg: #f2f1ed;
+  --fg-muted: #a8a6a0;
+  --rule: #2a2a28;
+  --rule-strong: #3c3c38;
+
+  --accent: #e5484d;
+  --accent-fg: #0a0a0a;
+  --accent-tint-40: rgb(229 72 77 / 40%);
+  --accent-tint-15: rgb(229 72 77 / 15%);
+
+  --link: #f2f1ed;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --bg: #0a0a0a;
+    --bg-raised: #141412;
+    --fg: #f2f1ed;
+    --fg-muted: #a8a6a0;
+    --rule: #2a2a28;
+    --rule-strong: #3c3c38;
+
+    --accent: #e5484d;
+    --accent-fg: #0a0a0a;
+    --accent-tint-40: rgb(229 72 77 / 40%);
+    --accent-tint-15: rgb(229 72 77 / 15%);
+
+    --link: #f2f1ed;
+  }
+}

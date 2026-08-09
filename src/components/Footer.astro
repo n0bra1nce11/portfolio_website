@@ -1,0 +1,51 @@
+---
+import { site } from '@/lib/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    <p class="mono site-footer-meta">
+      &copy; {year} {site.name}. Static site, no trackers, no third-party requests — see
+      <a href="/security/">/security</a>.
+    </p>
+    <div class="site-footer-links">
+      <a href={`mailto:${site.email}`}>Email</a>
+      <a href={site.github} rel="me noopener noreferrer" target="_blank">GitHub</a>
+      <a href={site.linkedin} rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+      <ThemeToggle />
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    margin-top: var(--space-7);
+  }
+
+  .site-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--fg-muted);
+  }
+
+  .site-footer-meta {
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .site-footer-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import SeverityBadge from './SeverityBadge.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
+  cvssVector?: string;
+  cvssScore?: number;
+  affected?: string;
+}
+
+const { id, title, severity, cvssVector, cvssScore, affected } = Astro.props;
+---
+
+<section class="finding-block" id={id} aria-labelledby={`${id}-title`}>
+  <header class="finding-header">
+    <p class="finding-id mono">{id}</p>
+    <h3 id={`${id}-title`}>{title}</h3>
+    <div class="finding-meta">
+      <SeverityBadge level={severity} />
+      {
+        cvssVector && (
+          <span class="mono finding-cvss">
+            {cvssVector}
+            {typeof cvssScore === 'number' && <> — {cvssScore.toFixed(1)}</>}
+          </span>
+        )
+      }
+      {affected && <span class="mono finding-affected">{affected}</span>}
+    </div>
+  </header>
+
+  <div class="finding-body">
+    <h4>Business impact</h4>
+    <div class="finding-impact">
+      <slot name="impact">
+        <p class="todo">TODO: plain-language business impact for a non-technical reader.</p>
+      </slot>
+    </div>
+
+    <h4>Reproduction steps</h4>
+    <div class="finding-repro">
+      <slot name="reproduction">
+        <p class="todo">TODO: numbered reproduction steps.</p>
+      </slot>
+    </div>
+
+    <h4>Evidence</h4>
+    <div class="finding-evidence">
+      <slot name="evidence">
+        <p class="todo">TODO: screenshot / request-response pair / log excerpt.</p>
+      </slot>
+    </div>
+
+    <h4>Remediation</h4>
+    <div class="finding-remediation">
+      <slot name="remediation">
+        <p class="todo">TODO: concrete remediation guidance.</p>
+      </slot>
+    </div>
+  </div>
+</section>
+
+<style>
+  .finding-block {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    margin-block: var(--space-4);
+    scroll-margin-top: 5rem;
+  }
+
+  .finding-header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .finding-id {
+    color: var(--fg-muted);
+    font-size: var(--fs-sm);
+    margin: 0 0 0.25rem;
+  }
+
+  .finding-header h3 {
+    margin: 0 0 var(--space-1);
+  }
+
+  .finding-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+  }
+
+  .finding-cvss,
+  .finding-affected {
+    color: var(--fg-muted);
+  }
+
+  .finding-body h4 {
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-muted);
+    margin: var(--space-3) 0 var(--space-1);
+  }
+
+  .finding-body h4:first-child {
+    margin-top: 0;
+  }
+
+  .todo {
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    border: 1px dashed var(--rule-strong);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+  }
+</style>

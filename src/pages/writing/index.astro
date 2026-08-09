@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { slugify } from '@/lib/slug';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Write-ups on detection engineering, VAPT methodology, and GRC — plus reusable resources like checklists and templates."
+>
+  <div class="container">
+    <header class="prose page-header">
+      <h1>Writing</h1>
+      <p>Notes and reusable artifacts, not a marketing blog.</p>
+    </header>
+
+    <ul class="post-index prose">
+      {
+        posts.map((post) => (
+          <li class="post-index-item">
+            <a href={`/writing/${slugify(post.id)}/`}>
+              <p class="mono post-index-date">
+                {post.data.date.toISOString().slice(0, 10)}
+                {post.data.resourceUrl && <span class="post-index-badge"> · resource</span>}
+              </p>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.summary}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: var(--space-4) 0;
+  }
+
+  .post-index {
+    list-style: none;
+    margin: var(--space-4) 0 var(--space-6);
+    padding: 0;
+  }
+
+  .post-index-item {
+    border-top: 1px solid var(--rule);
+    padding-block: var(--space-3);
+  }
+
+  .post-index-item a {
+    text-decoration: none;
+    color: var(--fg);
+    display: block;
+  }
+
+  .post-index-item h2 {
+    font-size: var(--fs-lg);
+    margin: var(--space-1) 0;
+  }
+
+  .post-index-item p:not(.post-index-date) {
+    color: var(--fg-muted);
+    margin: 0;
+  }
+
+  .post-index-date {
+    color: var(--fg-muted);
+    font-size: var(--fs-sm);
+    margin: 0;
+  }
+
+  .post-index-badge {
+    color: var(--accent);
+  }
+</style>

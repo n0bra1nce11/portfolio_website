@@ -1,0 +1,93 @@
+---
+interface Props {
+  refId: string;
+  version: string;
+  date: Date;
+  classification: string;
+  author: string;
+  status?: 'complete' | 'template' | 'stub';
+}
+
+const { refId, version, date, classification, author, status } = Astro.props;
+
+const formattedDate = date.toISOString().slice(0, 10);
+---
+
+<div class="doc-metadata mono">
+  <dl>
+    <div>
+      <dt>Reference</dt>
+      <dd>{refId}</dd>
+    </div>
+    <div>
+      <dt>Version</dt>
+      <dd>{version}</dd>
+    </div>
+    <div>
+      <dt>Date</dt>
+      <dd>{formattedDate}</dd>
+    </div>
+    <div>
+      <dt>Classification</dt>
+      <dd>{classification}</dd>
+    </div>
+    <div>
+      <dt>Author</dt>
+      <dd>{author}</dd>
+    </div>
+  </dl>
+  {
+    status === 'stub' && (
+      <p class="doc-metadata-notice">
+        This case study is a structural placeholder — content is not yet written. See the TODO
+        blocks below for what will go here.
+      </p>
+    )
+  }
+  {
+    status === 'template' && (
+      <p class="doc-metadata-notice">
+        This page is a fully-built template. Findings, dates, and figures below are illustrative
+        examples — not real reported vulnerabilities — until the real (sanitized) engagement
+        content replaces them. See inline TODO markers.
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .doc-metadata {
+    border-top: 1px solid var(--fg);
+    border-bottom: 1px solid var(--fg);
+    padding-block: var(--space-2);
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  .doc-metadata dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  .doc-metadata dt {
+    font-size: var(--fs-sm);
+    color: var(--fg-muted);
+    margin: 0 0 0.15rem;
+  }
+
+  .doc-metadata dd {
+    margin: 0;
+    font-size: var(--fs-sm);
+  }
+
+  .doc-metadata-notice {
+    margin: var(--space-2) 0 0;
+    font-family: var(--font-serif);
+    font-size: var(--fs-sm);
+    color: var(--fg-muted);
+    border: 1px dashed var(--rule-strong);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+  }
+</style>

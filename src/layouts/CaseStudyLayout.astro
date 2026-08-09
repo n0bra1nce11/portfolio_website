@@ -1,0 +1,128 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import DocumentMetadataHeader from '@/components/DocumentMetadataHeader.astro';
+
+interface Props {
+  title: string;
+  summary: string;
+  refId: string;
+  version: string;
+  date: Date;
+  classification: string;
+  author: string;
+  status: 'complete' | 'template' | 'stub';
+}
+
+const { title, summary, refId, version, date, classification, author, status } = Astro.props;
+---
+
+<BaseLayout title={title} description={summary}>
+  <!-- Print-only cover page: hidden on screen, shown via print.css -->
+  <div class="print-cover print-only">
+    <div class="print-cover-classification mono">{classification}</div>
+    <div>
+      <p class="print-cover-title">{title}</p>
+      <p class="mono">{summary}</p>
+    </div>
+    <table>
+      <tbody>
+        <tr><th scope="row">Reference</th><td>{refId}</td></tr>
+        <tr><th scope="row">Version</th><td>{version}</td></tr>
+        <tr><th scope="row">Date</th><td>{date.toISOString().slice(0, 10)}</td></tr>
+        <tr><th scope="row">Author</th><td>{author}</td></tr>
+        <tr><th scope="row">Classification</th><td>{classification}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <article class="prose case-study">
+    <p class="mono case-study-eyebrow"><a href="/work/">Work</a> / {refId}</p>
+    <h1>{title}</h1>
+    <p class="case-study-summary">{summary}</p>
+
+    <DocumentMetadataHeader
+      refId={refId}
+      version={version}
+      date={date}
+      classification={classification}
+      author={author}
+      status={status}
+    />
+
+    <slot />
+
+    <hr class="hairline" />
+    <p class="case-study-nda mono">
+      Client engagement details are confidential under NDA. This document is offered as a
+      sanitized work sample — see <a href="/experience/">Experience</a> for scope of work.
+    </p>
+  </article>
+
+  <!-- Print-only distribution list, appears after the cover page -->
+  <div class="print-distribution-list print-only container">
+    <h2>Distribution list</h2>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Copy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="todo mono" colspan="3">TODO: fill in recipients before distributing a real copy.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Version history</h2>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Version</th>
+          <th scope="col">Date</th>
+          <th scope="col">Author</th>
+          <th scope="col">Change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{version}</td>
+          <td>{date.toISOString().slice(0, 10)}</td>
+          <td>{author}</td>
+          <td>Initial publication</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</BaseLayout>
+
+<style>
+  .case-study-eyebrow {
+    color: var(--fg-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-1);
+  }
+
+  .case-study-eyebrow a {
+    color: var(--fg-muted);
+  }
+
+  .case-study-summary {
+    font-size: var(--fs-lg);
+    color: var(--fg-muted);
+  }
+
+  .case-study-nda {
+    color: var(--fg-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .case-study {
+    padding-block: var(--space-4) var(--space-6);
+  }
+
+  .todo {
+    color: var(--fg-muted);
+  }
+</style>
