@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writeups — Aayush Shrestha</title>
+<meta name="description" content="CTF writeups and security research notes by Aayush Shrestha.">
+<link rel="canonical" href="https://aayushng.dev/writeups.html">
+<meta name="theme-color" content="#1f6feb">
+<meta name="color-scheme" content="light dark">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="index.html#top" class="navbar__brand">
+      <span class="navbar__brand-dot" aria-hidden="true"></span>
+      aayush<span class="navbar__brand-accent">.sec</span>
+    </a>
+
+    <nav class="navbar__nav" id="navMenu" aria-label="Primary">
+      <ul class="navbar__list">
+        <li><a href="index.html#about" class="navbar__link">About</a></li>
+        <li><a href="index.html#projects" class="navbar__link">Projects</a></li>
+        <li><a href="writeups.html" class="navbar__link is-active">Writeups</a></li>
+        <li><a href="index.html#achievements" class="navbar__link">Achievements</a></li>
+        <li><a href="index.html#contact" class="navbar__link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark and light theme" aria-pressed="false">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+
+      <button class="navbar__burger" id="navBurger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="section" id="writeups-hero">
+    <div class="section__inner panel panel--sky">
+      <p class="eyebrow mono reveal">Research Notes</p>
+      <h2 class="section__title reveal">Writeups</h2>
+      <p class="section__lede reveal">
+        Box walkthroughs, CTF solves and lab research — documented as I go, mostly for my own reference and
+        occasionally useful to whoever stumbles onto them.
+      </p>
+
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <h3 class="project-card__title">HackAstra 2026 — Web Exploitation Chain</h3>
+          <p class="project-card__desc">Walkthrough of an authentication bypass chained with an IDOR to reach admin-level access during HackAstra CTF at Herald College.</p>
+          <div class="tag-row">
+            <span class="tag mono">Web</span>
+            <span class="tag mono">IDOR</span>
+            <span class="tag mono">Auth Bypass</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="project-card__link">Read</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <h3 class="project-card__title">IEEE LogPoint CTF — SIEM Log Triage</h3>
+          <p class="project-card__desc">Notes on parsing noisy Wazuh alert logs under time pressure to isolate the real indicators of compromise.</p>
+          <div class="tag-row">
+            <span class="tag mono">SIEM</span>
+            <span class="tag mono">Wazuh</span>
+            <span class="tag mono">Forensics</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="project-card__link">Read</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <h3 class="project-card__title">OWASP Nepal Challenge — Crypto Puzzle Breakdown</h3>
+          <p class="project-card__desc">How a weak key-derivation step in a custom cipher was recovered and exploited to decrypt the flag.</p>
+          <div class="tag-row">
+            <span class="tag mono">Cryptography</span>
+            <span class="tag mono">CTF</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="project-card__link">Read</a>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <h3 class="project-card__title">Softwarica CTF 2024 — Reversing a Packed Binary</h3>
+          <p class="project-card__desc">Unpacking and reverse engineering a stripped ELF binary to recover the win-condition logic.</p>
+          <div class="tag-row">
+            <span class="tag mono">Reverse Engineering</span>
+            <span class="tag mono">ELF</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="project-card__link">Read</a>
+          </div>
+        </article>
+      </div>
+
+      <a href="index.html#top" class="btn btn--ghost reveal btn--back">&larr; Back to Portfolio</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__tagline mono">Break it to understand it. Fix it to trust it.</p>
+    <p class="footer__copy">&copy; <span id="footerYear"></span> Aayush Shrestha. All rights reserved.</p>
+  </div>
+</footer>
+
+<button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">^</button>
+
+<script src="script.js"></script>
+</body>
+</html>

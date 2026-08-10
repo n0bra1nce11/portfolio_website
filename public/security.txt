@@ -1,9 +1,0 @@
-# security.txt — https://www.rfc-editor.org/rfc/rfc9116
-Contact: mailto:www.aayushng@gmail.com
-Expires: 2027-08-09T00:00:00.000Z
-Preferred-Languages: en
-Canonical: https://example.com/.well-known/security.txt
-
-# TODO: replace the Canonical URL above with the real production domain
-# once deployed, and add a PGP key line here if you publish one, e.g.:
-# Encryption: https://example.com/pgp-key.txt
