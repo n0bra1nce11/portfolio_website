@@ -10,7 +10,7 @@ function initThemeToggle() {
   const toggleBtn = document.getElementById('themeToggle');
   const stored = window.__portfolioTheme;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = stored || (prefersDark ? 'dark' : 'light');
+  const initial = stored || (prefersDark ? 'light' : 'dark');
 
   applyTheme(initial);
 
@@ -140,47 +140,6 @@ function initRevealAnimations() {
   items.forEach((item) => observer.observe(item));
 }
 
-/* ---------- Hero typewriter ---------- */
-function initHeroTypewriter() {
-  const el = document.getElementById('heroTypewriter');
-  if (!el) return;
-
-  const commands = [
-    'nmap -sV -p- target.lab',
-    'whoami --role pentester',
-    'auditctl --scope iso27001 --controls 93',
-    'python3 enum_web.py --target scope.txt',
-  ];
-
-  let cmdIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
-
-  function tick() {
-    const current = commands[cmdIndex];
-
-    if (!deleting) {
-      charIndex++;
-      el.textContent = current.slice(0, charIndex);
-      if (charIndex === current.length) {
-        deleting = true;
-        setTimeout(tick, 1400);
-        return;
-      }
-    } else {
-      charIndex--;
-      el.textContent = current.slice(0, charIndex);
-      if (charIndex === 0) {
-        deleting = false;
-        cmdIndex = (cmdIndex + 1) % commands.length;
-      }
-    }
-    setTimeout(tick, deleting ? 28 : 55);
-  }
-
-  tick();
-}
-
 /* ---------- Stat counters ---------- */
 function initStatCounters() {
   const counters = document.querySelectorAll('[data-count]');
@@ -210,87 +169,6 @@ function initStatCounters() {
       else el.textContent = target + suffix;
     }
     requestAnimationFrame(frame);
-  }
-}
-
-/* ---------- Skill bar fill on view ---------- */
-function initSkillBars() {
-  const bars = document.querySelectorAll('.skill-bar');
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const bar = entry.target;
-        const level = bar.getAttribute('data-level');
-        const fill = bar.querySelector('.skill-bar__fill');
-        requestAnimationFrame(() => { fill.style.width = level + '%'; });
-        observer.unobserve(bar);
-      });
-    },
-    { threshold: 0.4 }
-  );
-  bars.forEach((bar) => observer.observe(bar));
-}
-
-/* ---------- Threat matrix (Security Pulse Board) ---------- */
-function initThreatMatrix() {
-  const matrixEl = document.getElementById('threatMatrix');
-  if (!matrixEl) return;
-
-  const vectors = [
-    'Phishing Vector', 'SQL Injection', 'XSS Payload', 'Privilege Escalation',
-    'Misconfigured Firewall', 'Weak Credentials', 'Unpatched CVE', 'Insider Threat',
-    'Ransomware Signature', 'DNS Spoofing', 'Session Hijack', 'API Abuse',
-    'Supply Chain Risk', 'Broken Access Control', 'Malicious Macro', 'Lateral Movement',
-  ];
-
-  const rows = 5;
-  const cols = 8;
-  const cellCount = rows * cols;
-
-  const tooltip = document.createElement('div');
-  tooltip.className = 'matrix-tooltip';
-  tooltip.setAttribute('role', 'tooltip');
-  document.body.appendChild(tooltip);
-
-  for (let i = 0; i < cellCount; i++) {
-    const severity = Math.random();
-    const confidence = Math.round(40 + Math.random() * 59);
-    const impact = severity > 0.66 ? 'High' : severity > 0.33 ? 'Medium' : 'Low';
-    const vector = vectors[Math.floor(Math.random() * vectors.length)];
-
-    const cell = document.createElement('div');
-    cell.className = 'matrix-cell';
-    cell.style.opacity = String(0.18 + severity * 0.8);
-    cell.tabIndex = 0;
-    cell.setAttribute('aria-label', vector + ', confidence ' + confidence + '%, impact ' + impact);
-
-    cell.addEventListener('mouseenter', (e) => showTooltip(e, vector, confidence, impact));
-    cell.addEventListener('mousemove', (e) => positionTooltip(e));
-    cell.addEventListener('mouseleave', hideTooltip);
-    cell.addEventListener('focus', (e) => showTooltip(e, vector, confidence, impact));
-    cell.addEventListener('blur', hideTooltip);
-
-    matrixEl.appendChild(cell);
-  }
-
-  function showTooltip(e, vector, confidence, impact) {
-    tooltip.innerHTML = '<strong>' + vector + '</strong>Confidence: ' + confidence + '%<br>Impact: ' + impact;
-    tooltip.classList.add('is-visible');
-    positionTooltip(e);
-  }
-
-  function positionTooltip(e) {
-    const rect = e.target.getBoundingClientRect();
-    let x = rect.left + rect.width / 2;
-    let y = rect.top - 12;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-    tooltip.style.transform = 'translate(-50%, -100%)';
-  }
-
-  function hideTooltip() {
-    tooltip.classList.remove('is-visible');
   }
 }
 
@@ -428,44 +306,6 @@ function initProjectFilter() {
   });
 }
 
-/* ---------- Contact form validation + toast ---------- */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  const nameField = document.getElementById('contactName');
-  const emailField = document.getElementById('contactEmail');
-  const messageField = document.getElementById('contactMessage');
-  const errorName = document.getElementById('errorName');
-  const errorEmail = document.getElementById('errorEmail');
-  const errorMessage = document.getElementById('errorMessage');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let valid = true;
-
-    valid = validateField(nameField, errorName, nameField.value.trim().length >= 2, 'Please enter your name.') && valid;
-    valid = validateField(emailField, errorEmail, isValidEmail(emailField.value.trim()), 'Please enter a valid email address.') && valid;
-    valid = validateField(messageField, errorMessage, messageField.value.trim().length >= 10, 'Message should be at least 10 characters.') && valid;
-
-    if (valid) {
-      showToast('Message sent — thanks for reaching out. I\'ll reply soon.');
-      form.reset();
-    }
-  });
-
-  function validateField(field, errorEl, isValid, message) {
-    const wrapper = field.closest('.form-field');
-    wrapper.classList.toggle('has-error', !isValid);
-    errorEl.textContent = isValid ? '' : message;
-    return isValid;
-  }
-
-  function isValidEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  }
-}
-
 /* ---------- Toast ---------- */
 function showToast(message) {
   const toast = document.getElementById('toast');
@@ -497,6 +337,18 @@ function initFooterYear() {
   document.getElementById('footerYear').textContent = new Date().getFullYear();
 }
 
+/* ---------- Dossier live clock ---------- */
+function initDossierClock() {
+  const clock = document.getElementById('dossierClock');
+  if (!clock) return;
+
+  function tick() {
+    clock.textContent = new Date().toLocaleTimeString('en-GB', { hour12: false });
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
 /* ---------- Entry point ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initPreloader();
@@ -506,13 +358,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollSpy();
   initSmoothScroll();
   initRevealAnimations();
-  initHeroTypewriter();
+  initDossierClock();
   initStatCounters();
-  initSkillBars();
-  initThreatMatrix();
   initOpsConsole();
   initProjectFilter();
-  initContactForm();
   initToastClose();
   initBackToTop();
   initFooterYear();

@@ -11,7 +11,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -48,7 +48,7 @@
 </header>
 
 <main id="top">
-  <section class="section" id="writeups-hero">
+  <section class="section dotted" id="writeups-hero">
     <div class="section__inner panel panel--sky">
       <p class="eyebrow mono reveal">Research Notes</p>
       <h2 class="section__title reveal">Writeups</h2>
@@ -58,53 +58,97 @@
       </p>
 
       <div class="project-grid">
-        <article class="project-card reveal">
-          <h3 class="project-card__title">HackAstra 2026 — Web Exploitation Chain</h3>
-          <p class="project-card__desc">Walkthrough of an authentication bypass chained with an IDOR to reach admin-level access during HackAstra CTF at Herald College.</p>
-          <div class="tag-row">
-            <span class="tag mono">Web</span>
-            <span class="tag mono">IDOR</span>
-            <span class="tag mono">Auth Bypass</span>
+        <article class="project-card reveal" data-category="web">
+          <div class="card-scan">
+            <span class="card-scan__dot" aria-hidden="true"></span><span class="card-scan__dot" aria-hidden="true"></span>
+            <span class="card-scan__tag mono">[+] hackastra.md</span>
+            <span class="card-scan__status mono">SOLVED</span>
           </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">Read</a>
+          <div class="project-card__log mono" aria-hidden="true">
+            <span>[*] chaining idor...</span>
+            <span class="accent">[+] admin access reached</span>
           </div>
-        </article>
-
-        <article class="project-card reveal">
-          <h3 class="project-card__title">IEEE LogPoint CTF — SIEM Log Triage</h3>
-          <p class="project-card__desc">Notes on parsing noisy Wazuh alert logs under time pressure to isolate the real indicators of compromise.</p>
-          <div class="tag-row">
-            <span class="tag mono">SIEM</span>
-            <span class="tag mono">Wazuh</span>
-            <span class="tag mono">Forensics</span>
-          </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">Read</a>
+          <div class="project-card__body">
+            <h3 class="project-card__title">HackAstra 2026 — Web Exploitation Chain</h3>
+            <p class="project-card__desc">Walkthrough of an authentication bypass chained with an IDOR to reach admin-level access during HackAstra CTF at Herald College.</p>
+            <div class="tag-row">
+              <span class="tag mono">Web</span>
+              <span class="tag mono">IDOR</span>
+              <span class="tag mono">Auth Bypass</span>
+            </div>
+            <div class="project-card__links">
+              <a href="#" class="project-card__link">Read</a>
+            </div>
           </div>
         </article>
 
-        <article class="project-card reveal">
-          <h3 class="project-card__title">OWASP Nepal Challenge — Crypto Puzzle Breakdown</h3>
-          <p class="project-card__desc">How a weak key-derivation step in a custom cipher was recovered and exploited to decrypt the flag.</p>
-          <div class="tag-row">
-            <span class="tag mono">Cryptography</span>
-            <span class="tag mono">CTF</span>
+        <article class="project-card reveal" data-category="forensics">
+          <div class="card-scan">
+            <span class="card-scan__dot" aria-hidden="true"></span><span class="card-scan__dot" aria-hidden="true"></span>
+            <span class="card-scan__tag mono">[+] logpoint.md</span>
+            <span class="card-scan__status mono">SOLVED</span>
           </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">Read</a>
+          <div class="project-card__log mono" aria-hidden="true">
+            <span>[*] parsing alert queue...</span>
+            <span class="accent">[+] ioc isolated</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">IEEE LogPoint CTF — SIEM Log Triage</h3>
+            <p class="project-card__desc">Notes on parsing noisy Wazuh alert logs under time pressure to isolate the real indicators of compromise.</p>
+            <div class="tag-row">
+              <span class="tag mono">SIEM</span>
+              <span class="tag mono">Wazuh</span>
+              <span class="tag mono">Forensics</span>
+            </div>
+            <div class="project-card__links">
+              <a href="#" class="project-card__link">Read</a>
+            </div>
           </div>
         </article>
 
-        <article class="project-card reveal">
-          <h3 class="project-card__title">Softwarica CTF 2024 — Reversing a Packed Binary</h3>
-          <p class="project-card__desc">Unpacking and reverse engineering a stripped ELF binary to recover the win-condition logic.</p>
-          <div class="tag-row">
-            <span class="tag mono">Reverse Engineering</span>
-            <span class="tag mono">ELF</span>
+        <article class="project-card reveal" data-category="web">
+          <div class="card-scan">
+            <span class="card-scan__dot" aria-hidden="true"></span><span class="card-scan__dot" aria-hidden="true"></span>
+            <span class="card-scan__tag mono">[+] owasp-np.md</span>
+            <span class="card-scan__status mono">SOLVED</span>
           </div>
-          <div class="project-card__links">
-            <a href="#" class="project-card__link">Read</a>
+          <div class="project-card__log mono" aria-hidden="true">
+            <span>[*] cracking key derivation...</span>
+            <span class="accent">[+] flag decrypted</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">OWASP Nepal Challenge — Crypto Puzzle Breakdown</h3>
+            <p class="project-card__desc">How a weak key-derivation step in a custom cipher was recovered and exploited to decrypt the flag.</p>
+            <div class="tag-row">
+              <span class="tag mono">Cryptography</span>
+              <span class="tag mono">CTF</span>
+            </div>
+            <div class="project-card__links">
+              <a href="#" class="project-card__link">Read</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-category="forensics">
+          <div class="card-scan">
+            <span class="card-scan__dot" aria-hidden="true"></span><span class="card-scan__dot" aria-hidden="true"></span>
+            <span class="card-scan__tag mono">[+] softwarica24.md</span>
+            <span class="card-scan__status mono">SOLVED</span>
+          </div>
+          <div class="project-card__log mono" aria-hidden="true">
+            <span>[*] unpacking binary...</span>
+            <span class="accent">[+] win condition found</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Softwarica CTF 2024 — Reversing a Packed Binary</h3>
+            <p class="project-card__desc">Unpacking and reverse engineering a stripped ELF binary to recover the win-condition logic.</p>
+            <div class="tag-row">
+              <span class="tag mono">Reverse Engineering</span>
+              <span class="tag mono">ELF</span>
+            </div>
+            <div class="project-card__links">
+              <a href="#" class="project-card__link">Read</a>
+            </div>
           </div>
         </article>
       </div>
