@@ -1083,6 +1083,10 @@ body.no-scroll { overflow: hidden; }
 }
 
 .cert-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
   background: var(--paper);
   border: var(--border-w) solid var(--ink);
   border-radius: var(--radius-md);
@@ -1092,6 +1096,7 @@ body.no-scroll { overflow: hidden; }
 }
 .cert-card:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--shadow-color); }
 
+.cert-card__body { min-width: 0; }
 .cert-card__title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: var(--ink); }
 .cert-card__meta { color: var(--gray-700); font-size: 0.78rem; }
 
